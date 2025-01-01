@@ -1,5 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.ClearScript;
+using Microsoft.ClearScript.JavaScript;
+using Microsoft.ClearScript.V8;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.Extensibility;
+using System.Reflection;
+
 
 namespace VSExtension1
 {
@@ -9,6 +14,41 @@ namespace VSExtension1
     [VisualStudioContribution]
     internal class ExtensionEntrypoint : Extension
     {
+        /// <summary>
+        /// Creates and configures a new instance of the V8ScriptEngine.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider to resolve dependencies.</param>
+        /// <returns>A configured instance of the V8ScriptEngine.</returns>
+        /// <exception cref="ScriptEngineException">Thrown when there is an error executing the script.</exception>
+        /// <exception cref="FileLoadException">Thrown when there is an error loading a file.</exception>
+        static public ScriptEngine CreateScriptEngine(IServiceProvider serviceProvider)
+        {
+            var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+            var scriptEngine = new V8ScriptEngine();
+            scriptEngine.DocumentSettings.AccessFlags = DocumentAccessFlags.EnableFileLoading;
+            scriptEngine.DocumentSettings.SearchPath = Path.Combine(basePath, "scripts");
+
+            var extensibility = serviceProvider.GetRequiredService<VisualStudioExtensibility>();
+            try
+            {
+                scriptEngine.AddHostObject("extension", new GlobalObject(extensibility));
+                scriptEngine.ExecuteDocument("__init__.js", ModuleCategory.Standard);
+            }
+            catch (ScriptEngineException e)
+            {
+                // TODO
+                return scriptEngine;
+            }
+            catch (FileLoadException e)
+            {
+                // TODO
+                return scriptEngine;
+            }
+
+            return scriptEngine;
+        }
+
         /// <inheritdoc/>
         public override ExtensionConfiguration ExtensionConfiguration => new()
         {
@@ -26,6 +66,8 @@ namespace VSExtension1
             base.InitializeServices(serviceCollection);
 
             // You can configure dependency injection here by adding services to the serviceCollection.
+
+            serviceCollection.AddScoped<ScriptEngine>(CreateScriptEngine);
         }
     }
 }
