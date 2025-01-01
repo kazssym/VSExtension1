@@ -2,7 +2,7 @@
 # They are provided by a third-party and are governed by
 # separate terms of service, privacy policy, and support
 # documentation.
-
+---
 name: MSBuild
 
 on:
@@ -20,6 +20,9 @@ env:
   # https://docs.github.com/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
   BUILD_CONFIGURATION: Release
 
+  # Path to the NuGet global-packages folder.
+  NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
+
 permissions:
   contents: read
 
@@ -33,6 +36,13 @@ jobs:
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
 
+    - uses: actions/cache@v4
+      with:
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        path: ${{ env.NUGET_PACKAGES }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
+                
     - name: Restore NuGet packages
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: nuget restore ${{env.SOLUTION_FILE_PATH}}
