@@ -47,15 +47,15 @@ namespace VSExtension1
             scriptEngine.DocumentSettings.AccessFlags = DocumentAccessFlags.EnableFileLoading;
             scriptEngine.DocumentSettings.SearchPath = Path.Combine(basePath, "scripts");
 
+            var globalObject = new GlobalObject(serviceProvider);
             try
             {
-                var globalObject = new GlobalObject(serviceProvider);
                 scriptEngine.AddHostObject("extension", globalObject);
                 scriptEngine.ExecuteDocument("__init__.js", ModuleCategory.Standard);
             }
             catch (ScriptEngineException e)
             {
-                // TODO
+                globalObject.Output.WriteLine("ScriptEngineException: " + e.Message);
                 return scriptEngine;
             }
             catch (FileLoadException e)
