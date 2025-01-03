@@ -32,6 +32,8 @@ namespace VSExtension1
     [VisualStudioContribution]
     internal class ExtensionEntrypoint : Extension
     {
+        protected const string InitializeFileName = "__init__.js";
+
         /// <summary>
         /// Creates and configures a new instance of the V8ScriptEngine.
         /// </summary>
@@ -47,21 +49,21 @@ namespace VSExtension1
             scriptEngine.DocumentSettings.AccessFlags = DocumentAccessFlags.EnableFileLoading;
             scriptEngine.DocumentSettings.SearchPath = Path.Combine(basePath, "scripts");
 
-            var globalObject = new GlobalObject(serviceProvider);
+            var globalObject = serviceProvider.GetRequiredService<ExtensionObject>();
+            scriptEngine.AddHostObject("extension", globalObject);
             try
             {
-                scriptEngine.AddHostObject("extension", globalObject);
-                scriptEngine.ExecuteDocument("__init__.js", ModuleCategory.Standard);
+                scriptEngine.ExecuteDocument(InitializeFileName, ModuleCategory.Standard);
             }
             catch (ScriptEngineException e)
             {
                 globalObject.Output.WriteLine("ScriptEngineException: " + e.Message);
-                return scriptEngine;
+                throw;
             }
-            catch (FileLoadException e)
+            catch (Exception e)
             {
-                // TODO
-                return scriptEngine;
+                globalObject.Output.WriteLine("FileLoadException: " + e.Message);
+                throw;
             }
 
             return scriptEngine;
@@ -85,6 +87,7 @@ namespace VSExtension1
 
             // You can configure dependency injection here by adding services to the serviceCollection.
 
+            serviceCollection.AddScoped<ExtensionObject>();
             serviceCollection.AddScoped<ScriptEngine>(CreateScriptEngine);
         }
     }
