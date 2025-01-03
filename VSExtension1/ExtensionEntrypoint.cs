@@ -49,7 +49,7 @@ namespace VSExtension1
             scriptEngine.DocumentSettings.AccessFlags = DocumentAccessFlags.EnableFileLoading;
             scriptEngine.DocumentSettings.SearchPath = Path.Combine(basePath, "scripts");
 
-            var globalObject = serviceProvider.GetRequiredService<GlobalObject>();
+            var globalObject = serviceProvider.GetRequiredService<ExtensionObject>();
             scriptEngine.AddHostObject("extension", globalObject);
             try
             {
@@ -87,7 +87,7 @@ namespace VSExtension1
 
             // You can configure dependency injection here by adding services to the serviceCollection.
 
-            serviceCollection.AddScoped<GlobalObject>();
+            serviceCollection.AddScoped<ExtensionObject>();
             serviceCollection.AddScoped<ScriptEngine>(CreateScriptEngine);
         }
     }

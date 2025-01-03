@@ -16,7 +16,6 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.Extensibility;
 using Microsoft.VisualStudio.Extensibility.Documents;
@@ -26,9 +25,9 @@ using Microsoft.VisualStudio.Threading;
 namespace VSExtension1
 {
     /// <summary>
-    /// Global object for scripts.
+    /// Extension object for scripts.
     /// </summary>
-    public class GlobalObject
+    public class ExtensionObject
     {
         /// <summary>
         /// The joinable task factory object.
@@ -55,10 +54,10 @@ namespace VSExtension1
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GlobalObject"/> class.
+        /// Initializes a new instance of the <see cref="ExtensionObject"/> class.
         /// </summary>
         /// <param name="serviceProvider">service provider</param>
-        public GlobalObject(IServiceProvider serviceProvider)
+        public ExtensionObject(IServiceProvider serviceProvider)
         {
             this.JoinableTaskFactory = serviceProvider.GetRequiredService<JoinableTaskFactory>();
             this.Extensibility = serviceProvider.GetRequiredService<VisualStudioExtensibility>();
