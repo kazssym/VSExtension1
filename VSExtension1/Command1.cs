@@ -1,8 +1,10 @@
-﻿using System.Diagnostics;
 using Microsoft;
+using Microsoft.ClearScript;
 using Microsoft.VisualStudio.Extensibility;
 using Microsoft.VisualStudio.Extensibility.Commands;
 using Microsoft.VisualStudio.Extensibility.Shell;
+using System.Diagnostics;
+
 
 namespace VSExtension1
 {
@@ -14,15 +16,19 @@ namespace VSExtension1
     {
         private readonly TraceSource logger;
 
+        private readonly ScriptEngine _scriptEngine;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Command1"/> class.
         /// </summary>
         /// <param name="traceSource">Trace source instance to utilize.</param>
-        public Command1(TraceSource traceSource)
+        public Command1(VisualStudioExtensibility extensibility, TraceSource traceSource, ScriptEngine scriptEngine) :
+            base(extensibility)
         {
             // This optional TraceSource can be used for logging in the command. You can use dependency injection to access
             // other services here as well.
             this.logger = Requires.NotNull(traceSource, nameof(traceSource));
+            this._scriptEngine = Requires.NotNull(scriptEngine);
         }
 
         /// <inheritdoc />
@@ -45,6 +51,15 @@ namespace VSExtension1
         public override async Task ExecuteCommandAsync(IClientContext context, CancellationToken cancellationToken)
         {
             await this.Extensibility.Shell().ShowPromptAsync("Hello from an extension!", PromptOptions.OK, cancellationToken);
+            try
+            {
+                this._scriptEngine.Evaluate("command1()");
+            }
+            catch (ScriptEngineException e)
+            {
+                await this.Extensibility.Shell().ShowPromptAsync(e.Message, PromptOptions.OK, cancellationToken);
+                throw;
+            }
         }
     }
 }
