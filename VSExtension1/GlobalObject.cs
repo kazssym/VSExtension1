@@ -17,22 +17,54 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.Extensibility;
+using Microsoft.VisualStudio.Extensibility.Documents;
+using Microsoft.VisualStudio.Threading;
 
 
 namespace VSExtension1
 {
-    internal class GlobalObject
+    /// <summary>
+    /// Global object for scripts.
+    /// </summary>
+    public class GlobalObject
     {
-        private readonly VisualStudioExtensibility _extensibility;
+        /// <summary>
+        /// The joinable task factory object.
+        /// </summary>
+        protected JoinableTaskFactory JoinableTaskFactory { get; }
+
+        /// <summary>
+        /// The extensibility object.
+        /// </summary>
+        protected VisualStudioExtensibility Extensibility { get; }
+
+        
+        /// <summary>
+        /// The output channel joinable task.
+        /// </summary>
+        private readonly JoinableTask<OutputChannel> _outputChannel;
+
+        /// <summary>
+        /// The `Output` property for scripts.
+        /// </summary>
+        public TextWriter Output
+        {
+            get => this.JoinableTaskFactory.Run(async () => await this._outputChannel).Writer;
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GlobalObject"/> class.
         /// </summary>
-        /// <param name="extensibility">The Visual Studio extensibility object.</param>
-        public GlobalObject(VisualStudioExtensibility extensibility)
+        /// <param name="serviceProvider">service provider</param>
+        public GlobalObject(IServiceProvider serviceProvider)
         {
-            this._extensibility = extensibility;
+            this.JoinableTaskFactory = serviceProvider.GetRequiredService<JoinableTaskFactory>();
+            this.Extensibility = serviceProvider.GetRequiredService<VisualStudioExtensibility>();
+            this._outputChannel = this.JoinableTaskFactory.RunAsync(
+                () => this.Extensibility.Views().Output
+                    .CreateOutputChannelAsync(Strings.ScriptOutputChannelName, CancellationToken.None));
         }
     }
 }
