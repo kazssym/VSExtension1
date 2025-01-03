@@ -1,3 +1,21 @@
+// ExtensionEntrypoint.cs
+// Copyright (C) 2025 Kaz Nishimura
+//
+// This program is free software: you can redistribute it and/or modify it
+// under the terms of the GNU Affero General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or (at your
+// option) any later version.
+//
+// This program is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+// FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License
+// for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Microsoft.ClearScript;
 using Microsoft.ClearScript.JavaScript;
 using Microsoft.ClearScript.V8;
@@ -23,16 +41,16 @@ namespace VSExtension1
         /// <exception cref="FileLoadException">Thrown when there is an error loading a file.</exception>
         static public ScriptEngine CreateScriptEngine(IServiceProvider serviceProvider)
         {
-            var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? ".";
 
             var scriptEngine = new V8ScriptEngine();
             scriptEngine.DocumentSettings.AccessFlags = DocumentAccessFlags.EnableFileLoading;
             scriptEngine.DocumentSettings.SearchPath = Path.Combine(basePath, "scripts");
 
-            var extensibility = serviceProvider.GetRequiredService<VisualStudioExtensibility>();
             try
             {
-                scriptEngine.AddHostObject("extension", new GlobalObject(extensibility));
+                var globalObject = new GlobalObject(serviceProvider);
+                scriptEngine.AddHostObject("extension", globalObject);
                 scriptEngine.ExecuteDocument("__init__.js", ModuleCategory.Standard);
             }
             catch (ScriptEngineException e)
@@ -55,7 +73,7 @@ namespace VSExtension1
             Metadata = new(
                     id: "VSExtension1.682fdf2e-183c-439e-8304-457aec4697b9",
                     version: this.ExtensionAssemblyVersion,
-                    publisherName: "Publisher name",
+                    publisherName: "Kaz Nishimura",
                     displayName: "VSExtension1",
                     description: "Extension description"),
         };
