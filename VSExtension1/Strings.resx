@@ -120,4 +120,7 @@
   <data name="OutputChannelName" xml:space="preserve">
     <value>VSExtension1</value>
   </data>
+  <data name="ScriptOutputChannelName" xml:space="preserve">
+    <value>VSExtension1 Script</value>
+  </data>
 </root>

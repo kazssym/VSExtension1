@@ -68,5 +68,14 @@ namespace VSExtension1 {
                 return ResourceManager.GetString("OutputChannelName", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VSExtension1 Script.
+        /// </summary>
+        internal static string ScriptOutputChannelName {
+            get {
+                return ResourceManager.GetString("ScriptOutputChannelName", resourceCulture);
+            }
+        }
     }
 }
