@@ -5,7 +5,7 @@ var __require = /* @__PURE__ */ ((x) => typeof require !== "undefined" ? require
   throw Error('Dynamic require of "' + x + '" is not supported');
 });
 
-// node_modules/@huggingface/transformers/dist/transformers.js
+// node_modules/.deno/@huggingface+transformers@3.2.4/node_modules/@huggingface/transformers/dist/transformers.js
 var __webpack_modules__ = {
   /***/
   "./node_modules/onnxruntime-web/dist/ort-wasm-simd-threaded.jsep.wasm": (
