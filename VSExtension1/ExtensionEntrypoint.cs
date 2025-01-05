@@ -53,10 +53,14 @@ namespace VSExtension1
         /// <summary>
         /// Creates and configures a new instance of the V8ScriptEngine.
         /// </summary>
+        /// <remarks>
+        /// This method sets up the V8ScriptEngine with the necessary document settings and host objects.
+        /// It attempts to execute an initialization script and handles any exceptions that occur during this process.
+        /// </remarks>
         /// <param name="serviceProvider">The service provider to resolve dependencies.</param>
         /// <returns>A configured instance of the V8ScriptEngine.</returns>
         /// <exception cref="ScriptEngineException">Thrown when there is an error executing the script.</exception>
-        /// <exception cref="FileLoadException">Thrown when there is an error loading a file.</exception>
+        /// <exception cref="Exception">Thrown when there is a general error during script execution.</exception>
         protected static ScriptEngine CreateScriptEngine(IServiceProvider serviceProvider)
         {
             var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? ".";
@@ -80,7 +84,7 @@ namespace VSExtension1
             }
             catch (Exception e)
             {
-                globalObject.Output.WriteLine("FileLoadException: " + e.Message);
+                globalObject.Output.WriteLine("Exception: " + e.Message);
                 throw;
             }
 
