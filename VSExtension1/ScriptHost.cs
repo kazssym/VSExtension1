@@ -44,12 +44,6 @@ namespace VSExtension1
         private readonly JoinableTask<ScriptEngine> _scriptEngineJoinableTask;
 
         /// <summary>
-        /// Gets the task representing the asynchronous initialization of the script engine.
-        /// This property can be awaited to ensure the script engine is fully initialized before use.
-        /// </summary>
-        public Task<ScriptEngine> ScriptEngineAsync => this._scriptEngineJoinableTask.Task;
-
-        /// <summary>
         /// Provides synchronous access to the script engine, ensuring it is fully initialized before use.
         /// </summary>
         public ScriptEngine ScriptEngine => this.JoinableTaskFactory.Run(async () => await this._scriptEngineJoinableTask);
