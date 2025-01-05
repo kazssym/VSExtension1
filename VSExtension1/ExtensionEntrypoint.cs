@@ -32,7 +32,23 @@ namespace VSExtension1
     [VisualStudioContribution]
     internal class ExtensionEntrypoint : Extension
     {
+        /// <summary>
+        /// The name of the initialization file.
+        /// </summary>
         protected const string InitializeFileName = "__init__.js";
+
+        /// <summary>
+        /// Creates a meta object for a document.
+        /// </summary>
+        /// <param name="info">The document information.</param>
+        /// <returns>A dictionary containing meta information about the document.</returns>
+        protected static Dictionary<string, object> CreateMetaObject(DocumentInfo info)
+        {
+            return new Dictionary<string, object>()
+            {
+                {"url", info.Uri.ToString()},
+            };
+        }
 
         /// <summary>
         /// Creates and configures a new instance of the V8ScriptEngine.
@@ -41,16 +57,18 @@ namespace VSExtension1
         /// <returns>A configured instance of the V8ScriptEngine.</returns>
         /// <exception cref="ScriptEngineException">Thrown when there is an error executing the script.</exception>
         /// <exception cref="FileLoadException">Thrown when there is an error loading a file.</exception>
-        static public ScriptEngine CreateScriptEngine(IServiceProvider serviceProvider)
+        protected static ScriptEngine CreateScriptEngine(IServiceProvider serviceProvider)
         {
             var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? ".";
 
             var scriptEngine = new V8ScriptEngine();
             scriptEngine.DocumentSettings.AccessFlags = DocumentAccessFlags.EnableFileLoading;
             scriptEngine.DocumentSettings.SearchPath = Path.Combine(basePath, "scripts");
+            scriptEngine.DocumentSettings.ContextCallback = CreateMetaObject;
 
             var globalObject = serviceProvider.GetRequiredService<ExtensionObject>();
             scriptEngine.AddHostObject("extension", globalObject);
+            scriptEngine.AddHostType("URL", typeof(Scripting.ScriptingURL));
             try
             {
                 scriptEngine.ExecuteDocument(InitializeFileName, ModuleCategory.Standard);
