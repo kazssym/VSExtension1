@@ -16,12 +16,8 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Microsoft.ClearScript;
-using Microsoft.ClearScript.JavaScript;
-using Microsoft.ClearScript.V8;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.Extensibility;
-using System.Reflection;
 
 
 namespace VSExtension1
@@ -36,71 +32,6 @@ namespace VSExtension1
     [VisualStudioContribution]
     internal class Extension1 : Extension
     {
-        /// <summary>
-        /// The name of the initialization file.
-        /// </summary>
-        /// <remarks>
-        /// This file contains the initial JavaScript code to be executed by the V8ScriptEngine.
-        /// </remarks>
-        protected const string InitializeFileName = "__init__.js";
-
-        /// <summary>
-        /// Creates a meta object for a document.
-        /// </summary>
-        /// <remarks>
-        /// This method extracts and returns meta information from the provided DocumentInfo object.
-        /// </remarks>
-        /// <param name="info">The document information.</param>
-        /// <returns>A dictionary containing meta information about the document.</returns>
-        protected static Dictionary<string, object> CreateMetaObject(DocumentInfo info)
-        {
-            return new Dictionary<string, object>()
-            {
-                {"url", info.Uri.ToString()},
-            };
-        }
-
-        /// <summary>
-        /// Creates and configures a new instance of the V8ScriptEngine.
-        /// </summary>
-        /// <remarks>
-        /// This method sets up the V8ScriptEngine with the necessary document settings and host objects.
-        /// It attempts to execute an initialization script and handles any exceptions that occur during this process.
-        /// </remarks>
-        /// <param name="serviceProvider">The service provider to resolve dependencies.</param>
-        /// <returns>A configured instance of the V8ScriptEngine.</returns>
-        /// <exception cref="ScriptEngineException">Thrown when there is an error executing the script.</exception>
-        /// <exception cref="Exception">Thrown when there is a general error during script execution.</exception>
-        protected static ScriptEngine CreateScriptEngine(IServiceProvider serviceProvider)
-        {
-            var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? ".";
-
-            var scriptEngine = new V8ScriptEngine();
-            scriptEngine.DocumentSettings.AccessFlags = DocumentAccessFlags.EnableFileLoading;
-            scriptEngine.DocumentSettings.SearchPath = Path.Combine(basePath, "scripts");
-            scriptEngine.DocumentSettings.ContextCallback = CreateMetaObject;
-
-            var globalObject = serviceProvider.GetRequiredService<ExtensionObject>();
-            scriptEngine.AddHostObject("extension", globalObject);
-            scriptEngine.AddHostType("URL", typeof(Scripting.ScriptingURL));
-            try
-            {
-                scriptEngine.ExecuteDocument(InitializeFileName, ModuleCategory.Standard);
-            }
-            catch (ScriptEngineException e)
-            {
-                globalObject.Output.WriteLine("ScriptEngineException: " + e.Message);
-                throw;
-            }
-            catch (Exception e)
-            {
-                globalObject.Output.WriteLine("Exception: " + e.Message);
-                throw;
-            }
-
-            return scriptEngine;
-        }
-
         /// <inheritdoc/>
         public override ExtensionConfiguration ExtensionConfiguration => new()
         {
@@ -120,7 +51,7 @@ namespace VSExtension1
             // You can configure dependency injection here by adding services to the serviceCollection.
 
             serviceCollection.AddScoped<ExtensionObject>();
-            serviceCollection.AddScoped<ScriptEngine>(CreateScriptEngine);
+            serviceCollection.AddScoped<ScriptHost>();
         }
     }
 }

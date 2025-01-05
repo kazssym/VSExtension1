@@ -1,3 +1,21 @@
+// Command1.cs
+// Copyright (C) 2025 Kaz Nishimura
+//
+// This program is free software: you can redistribute it and/or modify it
+// under the terms of the GNU Affero General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or (at your
+// option) any later version.
+//
+// This program is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+// FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public License
+// for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Microsoft;
 using Microsoft.ClearScript;
 using Microsoft.VisualStudio.Extensibility;
@@ -9,26 +27,32 @@ using System.Diagnostics;
 namespace VSExtension1
 {
     /// <summary>
-    /// Command1 handler.
+    /// Handles the execution of Command1.
     /// </summary>
     [VisualStudioContribution]
     internal class Command1 : Command
     {
         private readonly TraceSource logger;
 
-        private readonly ScriptEngine _scriptEngine;
+        /// <summary>
+        /// Gets the script host used to manage the script engine.
+        /// </summary>
+        protected ScriptHost ScriptHost { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Command1"/> class.
         /// </summary>
-        /// <param name="traceSource">Trace source instance to utilize.</param>
-        public Command1(VisualStudioExtensibility extensibility, TraceSource traceSource, ScriptEngine scriptEngine) :
+        /// <param name="extensibility">The Visual Studio extensibility object.</param>
+        /// <param name="traceSource">The trace source instance to utilize for logging.</param>
+        /// <param name="scriptHost">The script host used to manage the script engine.</param>
+        public Command1(VisualStudioExtensibility extensibility, TraceSource traceSource,
+            ScriptHost scriptHost) :
             base(extensibility)
         {
             // This optional TraceSource can be used for logging in the command. You can use dependency injection to access
             // other services here as well.
             this.logger = Requires.NotNull(traceSource, nameof(traceSource));
-            this._scriptEngine = Requires.NotNull(scriptEngine);
+            this.ScriptHost = Requires.NotNull(scriptHost);
         }
 
         /// <inheritdoc />
@@ -53,7 +77,7 @@ namespace VSExtension1
             await this.Extensibility.Shell().ShowPromptAsync("Hello from an extension!", PromptOptions.OK, cancellationToken);
             try
             {
-                this._scriptEngine.Evaluate("command1()");
+                this.ScriptHost.ScriptEngine.Evaluate("command1()");
             }
             catch (ScriptEngineException e)
             {
