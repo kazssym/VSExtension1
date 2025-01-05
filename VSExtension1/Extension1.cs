@@ -29,17 +29,27 @@ namespace VSExtension1
     /// <summary>
     /// Extension entrypoint for the VisualStudio.Extensibility extension.
     /// </summary>
+    /// <remarks>
+    /// This class is responsible for initializing and configuring the extension,
+    /// including setting up the script engine and dependency injection.
+    /// </remarks>
     [VisualStudioContribution]
-    internal class ExtensionEntrypoint : Extension
+    internal class Extension1 : Extension
     {
         /// <summary>
         /// The name of the initialization file.
         /// </summary>
+        /// <remarks>
+        /// This file contains the initial JavaScript code to be executed by the V8ScriptEngine.
+        /// </remarks>
         protected const string InitializeFileName = "__init__.js";
 
         /// <summary>
         /// Creates a meta object for a document.
         /// </summary>
+        /// <remarks>
+        /// This method extracts and returns meta information from the provided DocumentInfo object.
+        /// </remarks>
         /// <param name="info">The document information.</param>
         /// <returns>A dictionary containing meta information about the document.</returns>
         protected static Dictionary<string, object> CreateMetaObject(DocumentInfo info)
