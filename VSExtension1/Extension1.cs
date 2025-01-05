@@ -29,17 +29,27 @@ namespace VSExtension1
     /// <summary>
     /// Extension entrypoint for the VisualStudio.Extensibility extension.
     /// </summary>
+    /// <remarks>
+    /// This class is responsible for initializing and configuring the extension,
+    /// including setting up the script engine and dependency injection.
+    /// </remarks>
     [VisualStudioContribution]
-    internal class ExtensionEntrypoint : Extension
+    internal class Extension1 : Extension
     {
         /// <summary>
         /// The name of the initialization file.
         /// </summary>
+        /// <remarks>
+        /// This file contains the initial JavaScript code to be executed by the V8ScriptEngine.
+        /// </remarks>
         protected const string InitializeFileName = "__init__.js";
 
         /// <summary>
         /// Creates a meta object for a document.
         /// </summary>
+        /// <remarks>
+        /// This method extracts and returns meta information from the provided DocumentInfo object.
+        /// </remarks>
         /// <param name="info">The document information.</param>
         /// <returns>A dictionary containing meta information about the document.</returns>
         protected static Dictionary<string, object> CreateMetaObject(DocumentInfo info)
@@ -53,10 +63,14 @@ namespace VSExtension1
         /// <summary>
         /// Creates and configures a new instance of the V8ScriptEngine.
         /// </summary>
+        /// <remarks>
+        /// This method sets up the V8ScriptEngine with the necessary document settings and host objects.
+        /// It attempts to execute an initialization script and handles any exceptions that occur during this process.
+        /// </remarks>
         /// <param name="serviceProvider">The service provider to resolve dependencies.</param>
         /// <returns>A configured instance of the V8ScriptEngine.</returns>
         /// <exception cref="ScriptEngineException">Thrown when there is an error executing the script.</exception>
-        /// <exception cref="FileLoadException">Thrown when there is an error loading a file.</exception>
+        /// <exception cref="Exception">Thrown when there is a general error during script execution.</exception>
         protected static ScriptEngine CreateScriptEngine(IServiceProvider serviceProvider)
         {
             var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? ".";
@@ -80,7 +94,7 @@ namespace VSExtension1
             }
             catch (Exception e)
             {
-                globalObject.Output.WriteLine("FileLoadException: " + e.Message);
+                globalObject.Output.WriteLine("Exception: " + e.Message);
                 throw;
             }
 
