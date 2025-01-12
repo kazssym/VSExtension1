@@ -4,6 +4,6 @@
     "@huggingface/transformers": "npm:@huggingface/transformers@^3.2.4"
   },
   "tasks": {
-    "bundle": "deno run --allow-env --allow-read --allow-run npm:esbuild --bundle --format=esm --outfile=VSExtension1/scripts/transformers.js @huggingface/transformers"
+    "bundle": "deno run --allow-env --allow-read --allow-run npm:esbuild --bundle --platform=neutral --outfile=VSExtension1/scripts/transformers.js @huggingface/transformers"
   }
 }
