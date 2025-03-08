@@ -1,7 +1,7 @@
 {
   "version": "4",
   "specifiers": {
-    "npm:@huggingface/transformers@^3.2.4": "3.2.4",
+    "npm:@huggingface/transformers@^3.4.0": "3.4.0",
     "npm:esbuild@*": "0.24.2"
   },
   "npm": {
@@ -86,11 +86,11 @@
     "@esbuild/win32-x64@0.24.2": {
       "integrity": "sha512-7VTgWzgMGvup6aSqDPLiW5zHaxYJGTO4OokMjIlrCtf+VpEL+cXKtCvg723iguPYI5oaUNdS+/V7OU2gvXVWEg=="
     },
-    "@huggingface/jinja@0.3.2": {
-      "integrity": "sha512-F2FvuIc+w1blGsaqJI/OErRbWH6bVJDCBI8Rm5D86yZ2wlwrGERsfIaru7XUv9eYC3DMP3ixDRRtF0h6d8AZcQ=="
+    "@huggingface/jinja@0.3.3": {
+      "integrity": "sha512-vQQr2JyWvVFba3Lj9es4q9vCl1sAc74fdgnEMoX8qHrXtswap9ge9uO3ONDzQB0cQ0PUyaKY2N6HaVbTBvSXvw=="
     },
-    "@huggingface/transformers@3.2.4": {
-      "integrity": "sha512-XLXoC2lj72SXCftDh1ptmYwCrjDtky+WT7W51jZERU4jbKzEXz0qHC+vCZwGX+Q7nTFogdwIGU2SuaCG9XKBLA==",
+    "@huggingface/transformers@3.4.0": {
+      "integrity": "sha512-jyuglsWc+Ls9/U7eGDDY+xYgDgDtwxQ4ul/5VQoqo2r0LfAnJ+zSRUjKnY6paOyzyhbKaftfEsvXJ049aL1cyw==",
       "dependencies": [
         "@huggingface/jinja",
         "onnxruntime-node",
@@ -236,8 +236,8 @@
     "@protobufjs/utf8@1.1.0": {
       "integrity": "sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw=="
     },
-    "@types/node@22.10.5": {
-      "integrity": "sha512-F8Q+SeGimwOo86fiovQh8qiXfFEh2/ocYv7tU5pJ3EXMSSxk1Joj5wefpFK2fHTf/N6HKGSxIDBT9f3gCxXPkQ==",
+    "@types/node@22.13.10": {
+      "integrity": "sha512-I6LPUvlRH+O6VRUqYOcMudhaIdUVWfsjnZavnsraHvpBwaEyMN29ry+0UVJhImYL16xsscu0aske3yA+uPOWfw==",
       "dependencies": [
         "undici-types"
       ]
@@ -342,11 +342,11 @@
         "@esbuild/win32-x64"
       ]
     },
-    "flatbuffers@1.12.0": {
-      "integrity": "sha512-c7CZADjRcl6j0PlvFy0ZqXQ67qSEZfrVPynmnL+2zPc+NtMvrF8Y0QceMo7QqnSPc7+uWjUIAbvCQ5WIKlMVdQ=="
+    "flatbuffers@25.2.10": {
+      "integrity": "sha512-7JlN9ZvLDG1McO3kbX0k4v+SUAg48L1rIwEvN6ZQl/eCtgJz9UylTMzE9wrmYrcorgxm3CX/3T/w5VAub99UUw=="
     },
-    "foreground-child@3.3.0": {
-      "integrity": "sha512-Ld2g8rrAyMYFXBhEqMz8ZAHBi4J4uS1i/CxGMDnjyFWddMXLVcDp051DZfu+t7+ab7Wv6SMqpWmyFIj5UbfFvg==",
+    "foreground-child@3.3.1": {
+      "integrity": "sha512-gIXjKqtFuWEgzFRJA9WCQeSJLZDjgJUOMCMzxtvFq/37KojM1BFGufqsCy0r4qSQmYLsZYMeyRqzIWOMup03sw==",
       "dependencies": [
         "cross-spawn",
         "signal-exit"
@@ -382,8 +382,8 @@
         "@pkgjs/parseargs"
       ]
     },
-    "long@5.2.3": {
-      "integrity": "sha512-lcHwpNoggQTObv5apGNCTdJrO69eHOZMi4BNC+rTLER8iHAqGrUVeLh/irVIM7zTw2bOXA8T6uNPeujwOLg/2Q=="
+    "long@5.3.1": {
+      "integrity": "sha512-ka87Jz3gcx/I7Hal94xaN2tZEOPoUOEVftkQqZx2EeQRN7LGdfLlI3FvZ+7WDplm+vK2Urx9ULrvSowtdCieng=="
     },
     "lru-cache@10.4.3": {
       "integrity": "sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ=="
@@ -410,8 +410,8 @@
     "onnxruntime-common@1.20.1": {
       "integrity": "sha512-YiU0s0IzYYC+gWvqD1HzLc46Du1sXpSiwzKb63PACIJr6LfL27VsXSXQvt68EzD3V0D5Bc0vyJTjmMxp0ylQiw=="
     },
-    "onnxruntime-common@1.21.0-dev.20241205-6ed77cc374": {
-      "integrity": "sha512-U4DGq/dZiboIEK0Zv1KUuWJesJ/txUALpWSXwI8kqOCSxe8GrI65xfRFeMbqYFhPVGAWZPsBpT1zo1s4ksrlrg=="
+    "onnxruntime-common@1.22.0-dev.20250306-aafa8d170a": {
+      "integrity": "sha512-NfIQnW4lIk/8LnhnYqknYPeet0U0+AADgKQRlKex36QrNoVSCY+aNaX6wyy2VzQ4CNWxsYh0E203ajRD/zxn0g=="
     },
     "onnxruntime-node@1.20.1": {
       "integrity": "sha512-di/I4HDXRw+FLgq+TyHmQEDd3cEp9iFFZm0r4uJ1Wd7b/WE1VXtKWo8yemex347c6GNF/3Pv86ZfPhIWxORr0w==",
@@ -420,13 +420,13 @@
         "tar"
       ]
     },
-    "onnxruntime-web@1.21.0-dev.20241205-d27fecd3d3": {
-      "integrity": "sha512-neeC9mv1sFWjUFrTaDl7enufNxbtSSTwR5V2i35ga4yXWS6r1MbpUwWwD1X+VKANujbSG8M5pk/ohRAOm2QhMQ==",
+    "onnxruntime-web@1.22.0-dev.20250306-ccf8fdd9ea": {
+      "integrity": "sha512-YwqS9Qqx2eKFXIx+HQloqRUG5/STHPUuNk8wn+qVVmwXBIfNdXX0/Lm7wgo5CnC2k+yqZmjDV5V1dZi4PeSPGQ==",
       "dependencies": [
         "flatbuffers",
         "guid-typescript",
         "long",
-        "onnxruntime-common@1.21.0-dev.20241205-6ed77cc374",
+        "onnxruntime-common@1.22.0-dev.20250306-aafa8d170a",
         "platform",
         "protobufjs"
       ]
@@ -470,8 +470,8 @@
         "glob"
       ]
     },
-    "semver@7.6.3": {
-      "integrity": "sha512-oVekP1cKtI+CTDvHWYFUcMtsK/00wmAEfyqKfNdARm8u1wNVhSgaX7A8d4UuIlUI5e84iEwOhs7ZPYRmzU9U6A=="
+    "semver@7.7.1": {
+      "integrity": "sha512-hlq8tAfn0m/61p4BVRcPzIGr6LKiMwo4VM6dGi6pt4qcRkmNzTcWq6eCEjEh+qXjkMDvPlOFFSGwQjoEa6gyMA=="
     },
     "sharp@0.33.5": {
       "integrity": "sha512-haPVm1EkS9pgvHrQ/F3Xy+hgcuMV0Wm9vfIBSiwZ05k+xgb0PkBQpGsAA/oWdDobNaZTH5ppvHtzCFbnSEwHVw==",
@@ -591,7 +591,7 @@
   },
   "workspace": {
     "dependencies": [
-      "npm:@huggingface/transformers@^3.2.4"
+      "npm:@huggingface/transformers@^3.4.0"
     ]
   }
 }
