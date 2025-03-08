@@ -84,6 +84,7 @@ namespace VSExtension1
                 await this.Extensibility.Shell().ShowPromptAsync(e.Message, PromptOptions.OK, cancellationToken);
                 throw;
             }
+            await this.Extensibility.Shell().ShowToolWindowAsync<ToolWindow1>(true, cancellationToken);
         }
     }
 }
