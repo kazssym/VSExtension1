@@ -11525,7 +11525,7 @@ var lT = Fn;
 }
 Object.defineProperty(we.versions, "web", { value: hs, enumerable: true });
 
-// node_modules/.deno/@huggingface+transformers@3.4.0/node_modules/@huggingface/transformers/dist/transformers.web.js
+// node_modules/.deno/@huggingface+transformers@3.4.2/node_modules/@huggingface/transformers/dist/transformers.web.js
 var __webpack_modules__ = {
   /***/
   "onnxruntime-common": (
@@ -14673,6 +14673,7 @@ var __webpack_modules__ = {
           // Sub-configs
           case "llava":
           case "paligemma":
+          case "gemma3":
           case "florence2":
           case "llava_onevision":
           case "idefics3":
@@ -14727,6 +14728,7 @@ var __webpack_modules__ = {
             break;
           case "gemma":
           case "gemma2":
+          case "gemma3_text":
           case "glm":
           case "helium":
             mapping["num_heads"] = "num_key_value_heads";
@@ -14982,7 +14984,7 @@ var __webpack_modules__ = {
         /*! url */
         "?154a"
       );
-      const VERSION = "3.4.0";
+      const VERSION = "3.4.2";
       const IS_BROWSER_ENV = typeof window !== "undefined" && typeof window.document !== "undefined";
       const IS_WEBWORKER_ENV = typeof self !== "undefined" && self.constructor?.name === "DedicatedWorkerGlobalScope";
       const IS_WEB_CACHE_AVAILABLE = typeof self !== "undefined" && "caches" in self;
@@ -17625,6 +17627,21 @@ var __webpack_modules__ = {
           Gemma2PreTrainedModel
         ),
         /* harmony export */
+        Gemma3ForCausalLM: () => (
+          /* binding */
+          Gemma3ForCausalLM
+        ),
+        /* harmony export */
+        Gemma3Model: () => (
+          /* binding */
+          Gemma3Model
+        ),
+        /* harmony export */
+        Gemma3PreTrainedModel: () => (
+          /* binding */
+          Gemma3PreTrainedModel
+        ),
+        /* harmony export */
         GemmaForCausalLM: () => (
           /* binding */
           GemmaForCausalLM
@@ -17973,6 +17990,26 @@ var __webpack_modules__ = {
         MaskedLMOutput: () => (
           /* binding */
           MaskedLMOutput
+        ),
+        /* harmony export */
+        Metric3DForDepthEstimation: () => (
+          /* binding */
+          Metric3DForDepthEstimation
+        ),
+        /* harmony export */
+        Metric3DPreTrainedModel: () => (
+          /* binding */
+          Metric3DPreTrainedModel
+        ),
+        /* harmony export */
+        Metric3Dv2ForDepthEstimation: () => (
+          /* binding */
+          Metric3Dv2ForDepthEstimation
+        ),
+        /* harmony export */
+        Metric3Dv2PreTrainedModel: () => (
+          /* binding */
+          Metric3Dv2PreTrainedModel
         ),
         /* harmony export */
         MgpstrForSceneTextRecognition: () => (
@@ -18530,6 +18567,26 @@ var __webpack_modules__ = {
           Qwen2VLPreTrainedModel
         ),
         /* harmony export */
+        RFDetrForObjectDetection: () => (
+          /* binding */
+          RFDetrForObjectDetection
+        ),
+        /* harmony export */
+        RFDetrModel: () => (
+          /* binding */
+          RFDetrModel
+        ),
+        /* harmony export */
+        RFDetrObjectDetectionOutput: () => (
+          /* binding */
+          RFDetrObjectDetectionOutput
+        ),
+        /* harmony export */
+        RFDetrPreTrainedModel: () => (
+          /* binding */
+          RFDetrPreTrainedModel
+        ),
+        /* harmony export */
         RTDetrForObjectDetection: () => (
           /* binding */
           RTDetrForObjectDetection
@@ -18548,6 +18605,26 @@ var __webpack_modules__ = {
         RTDetrPreTrainedModel: () => (
           /* binding */
           RTDetrPreTrainedModel
+        ),
+        /* harmony export */
+        RTDetrV2ForObjectDetection: () => (
+          /* binding */
+          RTDetrV2ForObjectDetection
+        ),
+        /* harmony export */
+        RTDetrV2Model: () => (
+          /* binding */
+          RTDetrV2Model
+        ),
+        /* harmony export */
+        RTDetrV2ObjectDetectionOutput: () => (
+          /* binding */
+          RTDetrV2ObjectDetectionOutput
+        ),
+        /* harmony export */
+        RTDetrV2PreTrainedModel: () => (
+          /* binding */
+          RTDetrV2PreTrainedModel
         ),
         /* harmony export */
         ResNetForImageClassification: () => (
@@ -18713,6 +18790,26 @@ var __webpack_modules__ = {
         SmolVLMForConditionalGeneration: () => (
           /* binding */
           SmolVLMForConditionalGeneration
+        ),
+        /* harmony export */
+        SnacDecoderModel: () => (
+          /* binding */
+          SnacDecoderModel
+        ),
+        /* harmony export */
+        SnacEncoderModel: () => (
+          /* binding */
+          SnacEncoderModel
+        ),
+        /* harmony export */
+        SnacModel: () => (
+          /* binding */
+          SnacModel
+        ),
+        /* harmony export */
+        SnacPreTrainedModel: () => (
+          /* binding */
+          SnacPreTrainedModel
         ),
         /* harmony export */
         SpeechT5ForSpeechToText: () => (
@@ -19567,7 +19664,7 @@ var __webpack_modules__ = {
           new_model_inputs.use_cache_branch = boolTensor(!!past_key_values);
         }
         if (session.inputNames.includes("position_ids") && new_model_inputs.attention_mask && !new_model_inputs.position_ids) {
-          const start_index = self2.config.model_type === "paligemma" ? 1 : 0;
+          const start_index = ["paligemma", "gemma3_text", "gemma3"].includes(self2.config.model_type) ? 1 : 0;
           new_model_inputs.position_ids = createPositionIds(new_model_inputs, past_key_values, start_index);
         }
         self2.addPastKeyValues(new_model_inputs, past_key_values);
@@ -22151,6 +22248,12 @@ var __webpack_modules__ = {
       }
       class Gemma2ForCausalLM extends Gemma2PreTrainedModel {
       }
+      class Gemma3PreTrainedModel extends PreTrainedModel {
+      }
+      class Gemma3Model extends Gemma3PreTrainedModel {
+      }
+      class Gemma3ForCausalLM extends Gemma3PreTrainedModel {
+      }
       class OpenELMPreTrainedModel extends PreTrainedModel {
       }
       class OpenELMModel extends OpenELMPreTrainedModel {
@@ -22604,6 +22707,34 @@ var __webpack_modules__ = {
           this.pred_boxes = pred_boxes;
         }
       }
+      class RTDetrV2PreTrainedModel extends PreTrainedModel {
+      }
+      class RTDetrV2Model extends RTDetrV2PreTrainedModel {
+      }
+      class RTDetrV2ForObjectDetection extends RTDetrV2PreTrainedModel {
+        /**
+         * @param {any} model_inputs
+         */
+        async _call(model_inputs) {
+          return new RTDetrV2ObjectDetectionOutput(await super._call(model_inputs));
+        }
+      }
+      class RTDetrV2ObjectDetectionOutput extends RTDetrObjectDetectionOutput {
+      }
+      class RFDetrPreTrainedModel extends PreTrainedModel {
+      }
+      class RFDetrModel extends RFDetrPreTrainedModel {
+      }
+      class RFDetrForObjectDetection extends RFDetrPreTrainedModel {
+        /**
+         * @param {any} model_inputs
+         */
+        async _call(model_inputs) {
+          return new RFDetrObjectDetectionOutput(await super._call(model_inputs));
+        }
+      }
+      class RFDetrObjectDetectionOutput extends RTDetrObjectDetectionOutput {
+      }
       class TableTransformerPreTrainedModel extends PreTrainedModel {
       }
       class TableTransformerModel extends TableTransformerPreTrainedModel {
@@ -22695,6 +22826,14 @@ var __webpack_modules__ = {
       class DepthProPreTrainedModel extends PreTrainedModel {
       }
       class DepthProForDepthEstimation extends DepthProPreTrainedModel {
+      }
+      class Metric3DPreTrainedModel extends PreTrainedModel {
+      }
+      class Metric3DForDepthEstimation extends Metric3DPreTrainedModel {
+      }
+      class Metric3Dv2PreTrainedModel extends PreTrainedModel {
+      }
+      class Metric3Dv2ForDepthEstimation extends Metric3Dv2PreTrainedModel {
       }
       class MaskFormerPreTrainedModel extends PreTrainedModel {
       }
@@ -23669,6 +23808,49 @@ var __webpack_modules__ = {
           });
         }
       }
+      class SnacPreTrainedModel extends PreTrainedModel {
+        main_input_name = "input_values";
+        forward_params = ["input_values"];
+      }
+      class SnacModel extends SnacPreTrainedModel {
+        /**
+         * Encodes the input audio waveform into discrete codes.
+         * @param {Object} inputs Model inputs
+         * @param {Tensor} [inputs.input_values] Float values of the input audio waveform, of shape `(batch_size, channels, sequence_length)`).
+         * @returns {Promise<Record<string, Tensor>>} The output tensors of shape `(batch_size, num_codebooks, sequence_length)`.
+         */
+        async encode(inputs) {
+          return await sessionRun(this.sessions["encoder_model"], inputs);
+        }
+        /**
+         * Decodes the given frames into an output audio waveform.
+         * @param {Record<string, Tensor>} inputs The encoded audio codes.
+         * @returns {Promise<{audio_values: Tensor}>} The output tensor of shape `(batch_size, num_channels, sequence_length)`.
+         */
+        async decode(inputs) {
+          return await sessionRun(this.sessions["decoder_model"], inputs);
+        }
+      }
+      class SnacEncoderModel extends SnacPreTrainedModel {
+        /** @type {typeof PreTrainedModel.from_pretrained} */
+        static async from_pretrained(pretrained_model_name_or_path, options = {}) {
+          return super.from_pretrained(pretrained_model_name_or_path, {
+            ...options,
+            // Update default model file name if not provided
+            model_file_name: options.model_file_name ?? "encoder_model"
+          });
+        }
+      }
+      class SnacDecoderModel extends SnacPreTrainedModel {
+        /** @type {typeof PreTrainedModel.from_pretrained} */
+        static async from_pretrained(pretrained_model_name_or_path, options = {}) {
+          return super.from_pretrained(pretrained_model_name_or_path, {
+            ...options,
+            // Update default model file name if not provided
+            model_file_name: options.model_file_name ?? "decoder_model"
+          });
+        }
+      }
       class PretrainedMixin {
         /**
          * Mapping from model type to model class.
@@ -23772,6 +23954,8 @@ var __webpack_modules__ = {
         ["wespeaker-resnet", ["WeSpeakerResNetModel", WeSpeakerResNetModel]],
         ["detr", ["DetrModel", DetrModel]],
         ["rt_detr", ["RTDetrModel", RTDetrModel]],
+        ["rt_detr_v2", ["RTDetrV2Model", RTDetrV2Model]],
+        ["rf_detr", ["RFDetrModel", RFDetrModel]],
         ["table-transformer", ["TableTransformerModel", TableTransformerModel]],
         ["vit", ["ViTModel", ViTModel]],
         ["ijepa", ["IJepaModel", IJepaModel]],
@@ -23825,7 +24009,8 @@ var __webpack_modules__ = {
       ]);
       const MODEL_MAPPING_NAMES_AUTO_ENCODER = /* @__PURE__ */ new Map([
         ["mimi", ["MimiModel", MimiModel]],
-        ["dac", ["DacModel", DacModel]]
+        ["dac", ["DacModel", DacModel]],
+        ["snac", ["SnacModel", SnacModel]]
       ]);
       const MODEL_MAPPING_NAMES_DECODER_ONLY = /* @__PURE__ */ new Map([
         ["bloom", ["BloomModel", BloomModel]],
@@ -23845,6 +24030,7 @@ var __webpack_modules__ = {
         ["cohere", ["CohereModel", CohereModel]],
         ["gemma", ["GemmaModel", GemmaModel]],
         ["gemma2", ["Gemma2Model", Gemma2Model]],
+        ["gemma3_text", ["Gemma3Model", Gemma3Model]],
         ["helium", ["HeliumModel", HeliumModel]],
         ["glm", ["GlmModel", GlmModel]],
         ["openelm", ["OpenELMModel", OpenELMModel]],
@@ -23937,6 +24123,7 @@ var __webpack_modules__ = {
         ["cohere", ["CohereForCausalLM", CohereForCausalLM]],
         ["gemma", ["GemmaForCausalLM", GemmaForCausalLM]],
         ["gemma2", ["Gemma2ForCausalLM", Gemma2ForCausalLM]],
+        ["gemma3_text", ["Gemma3ForCausalLM", Gemma3ForCausalLM]],
         ["helium", ["HeliumForCausalLM", HeliumForCausalLM]],
         ["glm", ["GlmForCausalLM", GlmForCausalLM]],
         ["openelm", ["OpenELMForCausalLM", OpenELMForCausalLM]],
@@ -24041,6 +24228,8 @@ var __webpack_modules__ = {
       const MODEL_FOR_OBJECT_DETECTION_MAPPING_NAMES = /* @__PURE__ */ new Map([
         ["detr", ["DetrForObjectDetection", DetrForObjectDetection]],
         ["rt_detr", ["RTDetrForObjectDetection", RTDetrForObjectDetection]],
+        ["rt_detr_v2", ["RTDetrV2ForObjectDetection", RTDetrV2ForObjectDetection]],
+        ["rf_detr", ["RFDetrForObjectDetection", RFDetrForObjectDetection]],
         ["table-transformer", ["TableTransformerForObjectDetection", TableTransformerForObjectDetection]],
         ["yolos", ["YolosForObjectDetection", YolosForObjectDetection]]
       ]);
@@ -24111,7 +24300,9 @@ var __webpack_modules__ = {
         ["depth_anything", ["DepthAnythingForDepthEstimation", DepthAnythingForDepthEstimation]],
         ["glpn", ["GLPNForDepthEstimation", GLPNForDepthEstimation]],
         ["sapiens", ["SapiensForDepthEstimation", SapiensForDepthEstimation]],
-        ["depth_pro", ["DepthProForDepthEstimation", DepthProForDepthEstimation]]
+        ["depth_pro", ["DepthProForDepthEstimation", DepthProForDepthEstimation]],
+        ["metric3d", ["Metric3DForDepthEstimation", Metric3DForDepthEstimation]],
+        ["metric3dv2", ["Metric3Dv2ForDepthEstimation", Metric3Dv2ForDepthEstimation]]
       ]);
       const MODEL_FOR_NORMAL_ESTIMATION_MAPPING_NAMES = /* @__PURE__ */ new Map([
         ["sapiens", ["SapiensForNormalEstimation", SapiensForNormalEstimation]]
@@ -24183,7 +24374,9 @@ var __webpack_modules__ = {
         ["DacEncoderModel", DacEncoderModel, MODEL_TYPES.EncoderOnly],
         ["DacDecoderModel", DacDecoderModel, MODEL_TYPES.EncoderOnly],
         ["MimiEncoderModel", MimiEncoderModel, MODEL_TYPES.EncoderOnly],
-        ["MimiDecoderModel", MimiDecoderModel, MODEL_TYPES.EncoderOnly]
+        ["MimiDecoderModel", MimiDecoderModel, MODEL_TYPES.EncoderOnly],
+        ["SnacEncoderModel", SnacEncoderModel, MODEL_TYPES.EncoderOnly],
+        ["SnacDecoderModel", SnacDecoderModel, MODEL_TYPES.EncoderOnly]
       ];
       for (const [name, model, type] of CUSTOM_MAPPING) {
         MODEL_TYPE_MAPPING.set(name, type);
@@ -25357,7 +25550,7 @@ var __webpack_modules__ = {
         /* harmony export */
         ImageFeatureExtractor: () => (
           /* reexport safe */
-          _base_image_processors_utils_js__WEBPACK_IMPORTED_MODULE_11__.ImageProcessor
+          _base_image_processors_utils_js__WEBPACK_IMPORTED_MODULE_12__.ImageProcessor
         ),
         /* harmony export */
         MoonshineFeatureExtractor: () => (
@@ -25375,24 +25568,29 @@ var __webpack_modules__ = {
           _seamless_m4t_feature_extraction_seamless_m4t_js__WEBPACK_IMPORTED_MODULE_6__.SeamlessM4TFeatureExtractor
         ),
         /* harmony export */
+        SnacFeatureExtractor: () => (
+          /* reexport safe */
+          _snac_feature_extraction_snac_js__WEBPACK_IMPORTED_MODULE_7__.SnacFeatureExtractor
+        ),
+        /* harmony export */
         SpeechT5FeatureExtractor: () => (
           /* reexport safe */
-          _speecht5_feature_extraction_speecht5_js__WEBPACK_IMPORTED_MODULE_7__.SpeechT5FeatureExtractor
+          _speecht5_feature_extraction_speecht5_js__WEBPACK_IMPORTED_MODULE_8__.SpeechT5FeatureExtractor
         ),
         /* harmony export */
         Wav2Vec2FeatureExtractor: () => (
           /* reexport safe */
-          _wav2vec2_feature_extraction_wav2vec2_js__WEBPACK_IMPORTED_MODULE_8__.Wav2Vec2FeatureExtractor
+          _wav2vec2_feature_extraction_wav2vec2_js__WEBPACK_IMPORTED_MODULE_9__.Wav2Vec2FeatureExtractor
         ),
         /* harmony export */
         WeSpeakerFeatureExtractor: () => (
           /* reexport safe */
-          _wespeaker_feature_extraction_wespeaker_js__WEBPACK_IMPORTED_MODULE_9__.WeSpeakerFeatureExtractor
+          _wespeaker_feature_extraction_wespeaker_js__WEBPACK_IMPORTED_MODULE_10__.WeSpeakerFeatureExtractor
         ),
         /* harmony export */
         WhisperFeatureExtractor: () => (
           /* reexport safe */
-          _whisper_feature_extraction_whisper_js__WEBPACK_IMPORTED_MODULE_10__.WhisperFeatureExtractor
+          _whisper_feature_extraction_whisper_js__WEBPACK_IMPORTED_MODULE_11__.WhisperFeatureExtractor
         )
         /* harmony export */
       });
@@ -25424,23 +25622,27 @@ var __webpack_modules__ = {
         /*! ./seamless_m4t/feature_extraction_seamless_m4t.js */
         "./src/models/seamless_m4t/feature_extraction_seamless_m4t.js"
       );
-      var _speecht5_feature_extraction_speecht5_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__2(
+      var _snac_feature_extraction_snac_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__2(
+        /*! ./snac/feature_extraction_snac.js */
+        "./src/models/snac/feature_extraction_snac.js"
+      );
+      var _speecht5_feature_extraction_speecht5_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__2(
         /*! ./speecht5/feature_extraction_speecht5.js */
         "./src/models/speecht5/feature_extraction_speecht5.js"
       );
-      var _wav2vec2_feature_extraction_wav2vec2_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__2(
+      var _wav2vec2_feature_extraction_wav2vec2_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__2(
         /*! ./wav2vec2/feature_extraction_wav2vec2.js */
         "./src/models/wav2vec2/feature_extraction_wav2vec2.js"
       );
-      var _wespeaker_feature_extraction_wespeaker_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__2(
+      var _wespeaker_feature_extraction_wespeaker_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__2(
         /*! ./wespeaker/feature_extraction_wespeaker.js */
         "./src/models/wespeaker/feature_extraction_wespeaker.js"
       );
-      var _whisper_feature_extraction_whisper_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__2(
+      var _whisper_feature_extraction_whisper_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__2(
         /*! ./whisper/feature_extraction_whisper.js */
         "./src/models/whisper/feature_extraction_whisper.js"
       );
-      var _base_image_processors_utils_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__2(
+      var _base_image_processors_utils_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__2(
         /*! ../base/image_processors_utils.js */
         "./src/base/image_processors_utils.js"
       );
@@ -28774,6 +28976,30 @@ ${fake_token_around_image}${global_img_token}` + image_token.repeat(image_seq_le
     }
   ),
   /***/
+  "./src/models/snac/feature_extraction_snac.js": (
+    /*!****************************************************!*\
+      !*** ./src/models/snac/feature_extraction_snac.js ***!
+      \****************************************************/
+    /***/
+    (__unused_webpack___webpack_module__, __webpack_exports__2, __webpack_require__2) => {
+      __webpack_require__2.r(__webpack_exports__2);
+      __webpack_require__2.d(__webpack_exports__2, {
+        /* harmony export */
+        SnacFeatureExtractor: () => (
+          /* binding */
+          SnacFeatureExtractor
+        )
+        /* harmony export */
+      });
+      var _dac_feature_extraction_dac_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__2(
+        /*! ../dac/feature_extraction_dac.js */
+        "./src/models/dac/feature_extraction_dac.js"
+      );
+      class SnacFeatureExtractor extends _dac_feature_extraction_dac_js__WEBPACK_IMPORTED_MODULE_0__.DacFeatureExtractor {
+      }
+    }
+  ),
+  /***/
   "./src/models/speecht5/feature_extraction_speecht5.js": (
     /*!************************************************************!*\
       !*** ./src/models/speecht5/feature_extraction_speecht5.js ***!
@@ -31149,11 +31375,12 @@ ${fake_token_around_image}${global_img_token}` + image_token.repeat(image_seq_le
           const id2label = this.model.config.id2label;
           const annotation = [];
           if (!subtask) {
+            const epsilon = 1e-5;
             const result = output[outputNames[0]];
             for (let i = 0; i < imageSizes.length; ++i) {
               const size = imageSizes[i];
               const item = result[i];
-              if (item.data.some((x) => x < 0 || x > 1)) {
+              if (item.data.some((x) => x < -epsilon || x > 1 + epsilon)) {
                 item.sigmoid_();
               }
               const mask = await _utils_image_js__WEBPACK_IMPORTED_MODULE_9__.RawImage.fromTensor(item.mul_(255).to("uint8")).resize(size[1], size[0]);
@@ -31210,7 +31437,8 @@ ${fake_token_around_image}${global_img_token}` + image_token.repeat(image_seq_le
           return annotation;
         }
       }
-      class BackgroundRemovalPipeline extends /** @type {new (options: ImagePipelineConstructorArgs) => ImageSegmentationPipelineType} */
+      class BackgroundRemovalPipeline extends /** @type {new (options: ImagePipelineConstructorArgs) => BackgroundRemovalPipelineType} */
+      /** @type {any} */
       ImageSegmentationPipeline {
         /**
          * Create a new BackgroundRemovalPipeline.
@@ -33968,9 +34196,10 @@ ${fake_token_around_image}${global_img_token}` + image_token.repeat(image_seq_le
             this.decoder.added_tokens = this.added_tokens;
             this.decoder.end_of_word_suffix = this.model.end_of_word_suffix;
           }
-          this.added_tokens_regex = this.added_tokens.length > 0 ? new RegExp(
-            this.added_tokens.slice().sort((a, b) => b.content.length - a.content.length).map((x) => `${x.lstrip ? "\\s*" : ""}(${(0, _utils_core_js__WEBPACK_IMPORTED_MODULE_1__.escapeRegExp)(x.content)})${x.rstrip ? "\\s*" : ""}`).join("|")
-          ) : null;
+          this.added_tokens_splitter = new _utils_data_structures_js__WEBPACK_IMPORTED_MODULE_5__.DictionarySplitter(
+            this.added_tokens.map((x) => x.content)
+          );
+          this.added_tokens_map = new Map(this.added_tokens.map((x) => [x.content, x]));
           this.mask_token = this.getToken("mask_token");
           this.mask_token_id = this.model.tokens_to_ids.get(this.mask_token);
           this.pad_token = this.getToken("pad_token", "eos_token");
@@ -34191,31 +34420,39 @@ ${fake_token_around_image}${global_img_token}` + image_token.repeat(image_seq_le
          */
         _encode_text(text) {
           if (text === null) return null;
-          const sections = this.added_tokens_regex ? text.split(this.added_tokens_regex).filter((x) => x) : [text];
-          const tokens = sections.map((x, section_index) => {
-            const addedToken = this.added_tokens.find((t) => t.content === x);
-            if (addedToken !== void 0) {
-              return x;
-            } else {
-              if (this.remove_space === true) {
-                x = x.trim().split(/\s+/).join(" ");
+          const sections = this.added_tokens_splitter.split(text);
+          for (let i = 0; i < sections.length; ++i) {
+            const addedToken = this.added_tokens_map.get(sections[i]);
+            if (addedToken) {
+              if (addedToken.lstrip && i > 0) {
+                sections[i - 1] = sections[i - 1].trimEnd();
               }
-              if (this.do_lowercase_and_remove_accent) {
-                x = lowercase_and_remove_accent(x);
+              if (addedToken.rstrip && i < sections.length - 1) {
+                sections[i + 1] = sections[i + 1].trimStart();
               }
-              if (this.normalizer !== null) {
-                x = this.normalizer(x);
-              }
-              if (x.length === 0) {
-                return [];
-              }
-              const sectionTokens = this.pre_tokenizer !== null ? this.pre_tokenizer(x, {
-                section_index
-              }) : [x];
-              const tokens2 = this.model(sectionTokens);
-              return tokens2;
             }
-          }).flat();
+          }
+          const tokens = sections.flatMap((x, section_index) => {
+            if (x.length === 0) return [];
+            if (this.added_tokens_map.has(x)) return [x];
+            if (this.remove_space === true) {
+              x = x.trim().split(/\s+/).join(" ");
+            }
+            if (this.do_lowercase_and_remove_accent) {
+              x = lowercase_and_remove_accent(x);
+            }
+            if (this.normalizer !== null) {
+              x = this.normalizer(x);
+            }
+            if (x.length === 0) {
+              return [];
+            }
+            const sectionTokens = this.pre_tokenizer !== null ? this.pre_tokenizer(x, {
+              section_index
+            }) : [x];
+            const tokens2 = this.model(sectionTokens);
+            return tokens2;
+          });
           return tokens;
         }
         /**
@@ -36045,6 +36282,11 @@ ${fake_token_around_image}${global_img_token}` + image_token.repeat(image_seq_le
           CharTrie
         ),
         /* harmony export */
+        DictionarySplitter: () => (
+          /* binding */
+          DictionarySplitter
+        ),
+        /* harmony export */
         PriorityQueue: () => (
           /* binding */
           PriorityQueue
@@ -36429,6 +36671,67 @@ ${fake_token_around_image}${global_img_token}` + image_token.repeat(image_seq_le
           return n;
         }
       }
+      class DictionarySplitter {
+        /**
+         * @param {string[]} dictionary The dictionary of words to use for splitting.
+         */
+        constructor(dictionary) {
+          this.trie = this._buildTrie(dictionary);
+        }
+        /**
+         * Builds a trie from the given dictionary.
+         * @param {string[]} dictionary The dictionary of words to build the trie from.
+         * @returns {Object} The root node of the trie.
+         * @private
+         */
+        _buildTrie(dictionary) {
+          const trie = /* @__PURE__ */ Object.create(null);
+          for (const word of dictionary) {
+            let node = trie;
+            for (let i = 0; i < word.length; ++i) {
+              node = node[word[i]] ??= /* @__PURE__ */ Object.create(null);
+            }
+            node.end = word;
+          }
+          return trie;
+        }
+        /**
+         * Splits the input text into tokens based on the dictionary.
+         * @param {string} text The input text to split.
+         * @returns {string[]} An array of tokens.
+         */
+        split(text) {
+          const result = [];
+          const n = text.length;
+          let start = 0;
+          let i = 0;
+          while (i < n) {
+            let node = this.trie;
+            let match = null;
+            let j2 = i;
+            while (j2 < n && (node = node[text[j2]])) {
+              if (node.end) {
+                match = node.end;
+              }
+              ++j2;
+            }
+            if (match) {
+              if (i > start) {
+                result.push(text.slice(start, i));
+              }
+              result.push(match);
+              i += match.length;
+              start = i;
+            } else {
+              ++i;
+            }
+          }
+          if (start < n) {
+            result.push(text.slice(start));
+          }
+          return result;
+        }
+      }
     }
   ),
   /***/
@@ -36772,6 +37075,13 @@ ${fake_token_around_image}${global_img_token}` + image_token.repeat(image_seq_le
         }
         return true;
       }
+      const REPO_ID_REGEX = /^(\b[\w\-.]+\b\/)?\b[\w\-.]{1,96}\b$/;
+      function isValidHfModelId(string) {
+        if (!REPO_ID_REGEX.test(string)) return false;
+        if (string.includes("..") || string.includes("--")) return false;
+        if (string.endsWith(".git") || string.endsWith(".ipynb")) return false;
+        return true;
+      }
       async function getFile(urlOrPath) {
         if (_env_js__WEBPACK_IMPORTED_MODULE_2__.env.useFS && !isValidUrl(urlOrPath, ["http:", "https:", "blob:"])) {
           return new FileResponse(urlOrPath.toString());
@@ -36935,21 +37245,20 @@ ${fake_token_around_image}${global_img_token}` + image_token.repeat(image_seq_le
           cache = _env_js__WEBPACK_IMPORTED_MODULE_2__.env.customCache;
         }
         const revision = options.revision ?? "main";
-        let requestURL = pathJoin(path_or_repo_id, filename);
-        let cachePath = pathJoin(_env_js__WEBPACK_IMPORTED_MODULE_2__.env.localModelPath, requestURL);
-        let localPath = requestURL;
-        let remoteURL = pathJoin(
+        const requestURL = pathJoin(path_or_repo_id, filename);
+        const validModelId = isValidHfModelId(path_or_repo_id);
+        const localPath = validModelId ? pathJoin(_env_js__WEBPACK_IMPORTED_MODULE_2__.env.localModelPath, requestURL) : requestURL;
+        const remoteURL = pathJoin(
           _env_js__WEBPACK_IMPORTED_MODULE_2__.env.remoteHost,
           _env_js__WEBPACK_IMPORTED_MODULE_2__.env.remotePathTemplate.replaceAll("{model}", path_or_repo_id).replaceAll("{revision}", encodeURIComponent(revision)),
           filename
         );
-        let fsCacheKey = revision === "main" ? requestURL : pathJoin(path_or_repo_id, revision, filename);
         let cacheKey;
-        let proposedCacheKey = cache instanceof FileCache ? fsCacheKey : remoteURL;
+        const proposedCacheKey = cache instanceof FileCache ? revision === "main" ? requestURL : pathJoin(path_or_repo_id, revision, filename) : remoteURL;
         let toCacheResponse = false;
         let response;
         if (cache) {
-          response = await tryCache(cache, cachePath, proposedCacheKey);
+          response = await tryCache(cache, localPath, proposedCacheKey);
         }
         const cacheHit = response !== void 0;
         if (response === void 0) {
@@ -36963,9 +37272,9 @@ ${fake_token_around_image}${global_img_token}` + image_token.repeat(image_seq_le
                 console.warn(`Unable to load from local path "${localPath}": "${e}"`);
               }
             } else if (options.local_files_only) {
-              throw new Error(`\`local_files_only=true\`, but attempted to load a remote file from: ${localPath}.`);
+              throw new Error(`\`local_files_only=true\`, but attempted to load a remote file from: ${requestURL}.`);
             } else if (!_env_js__WEBPACK_IMPORTED_MODULE_2__.env.allowRemoteModels) {
-              throw new Error(`\`env.allowRemoteModels=false\`, but attempted to load a remote file from: ${localPath}.`);
+              throw new Error(`\`env.allowRemoteModels=false\`, but attempted to load a remote file from: ${requestURL}.`);
             }
           }
           if (response === void 0 || response.status === 404) {
@@ -36975,6 +37284,9 @@ ${fake_token_around_image}${global_img_token}` + image_token.repeat(image_seq_le
               } else {
                 return null;
               }
+            }
+            if (!validModelId) {
+              throw Error(`Local file missing at "${localPath}" and download aborted due to invalid model ID "${path_or_repo_id}".`);
             }
             response = await getFile(remoteURL);
             if (response.status !== 200) {
@@ -37216,7 +37528,7 @@ ${fake_token_around_image}${global_img_token}` + image_token.repeat(image_seq_le
         }
         /**
          * Helper method for reading an image from a variety of input types.
-         * @param {RawImage|string|URL} input
+         * @param {RawImage|string|URL|Blob|HTMLCanvasElement|OffscreenCanvas} input
          * @returns The image object.
          *
          * **Example:** Read image from a URL.
@@ -37235,6 +37547,10 @@ ${fake_token_around_image}${global_img_token}` + image_token.repeat(image_seq_le
             return input;
           } else if (typeof input === "string" || input instanceof URL) {
             return await this.fromURL(input);
+          } else if (input instanceof Blob) {
+            return await this.fromBlob(input);
+          } else if (typeof HTMLCanvasElement !== "undefined" && input instanceof HTMLCanvasElement || typeof OffscreenCanvas !== "undefined" && input instanceof OffscreenCanvas) {
+            return this.fromCanvas(input);
           } else {
             throw new Error(`Unsupported input type: ${typeof input}`);
           }
@@ -39610,8 +39926,12 @@ ${fake_token_around_image}${global_img_token}` + image_token.repeat(image_seq_le
         return dims;
       }
       function safeIndex(index, size, dimension = null, boundsCheck = true) {
-        if (boundsCheck && (index < -size || index >= size)) {
-          throw new Error(`IndexError: index ${index} is out of bounds for dimension${dimension === null ? "" : " " + dimension} with size ${size}`);
+        if (index < -size || index >= size) {
+          if (boundsCheck) {
+            throw new Error(`IndexError: index ${index} is out of bounds for dimension${dimension === null ? "" : " " + dimension} with size ${size}`);
+          } else {
+            return index < -size ? 0 : size;
+          }
         }
         if (index < 0) {
           index = (index % size + size) % size;
@@ -41317,6 +41637,21 @@ var __webpack_exports__ = {};
       _models_js__WEBPACK_IMPORTED_MODULE_2__.Gemma2PreTrainedModel
     ),
     /* harmony export */
+    Gemma3ForCausalLM: () => (
+      /* reexport safe */
+      _models_js__WEBPACK_IMPORTED_MODULE_2__.Gemma3ForCausalLM
+    ),
+    /* harmony export */
+    Gemma3Model: () => (
+      /* reexport safe */
+      _models_js__WEBPACK_IMPORTED_MODULE_2__.Gemma3Model
+    ),
+    /* harmony export */
+    Gemma3PreTrainedModel: () => (
+      /* reexport safe */
+      _models_js__WEBPACK_IMPORTED_MODULE_2__.Gemma3PreTrainedModel
+    ),
+    /* harmony export */
     GemmaForCausalLM: () => (
       /* reexport safe */
       _models_js__WEBPACK_IMPORTED_MODULE_2__.GemmaForCausalLM
@@ -41820,6 +42155,26 @@ var __webpack_exports__ = {};
     MaxLengthCriteria: () => (
       /* reexport safe */
       _generation_stopping_criteria_js__WEBPACK_IMPORTED_MODULE_20__.MaxLengthCriteria
+    ),
+    /* harmony export */
+    Metric3DForDepthEstimation: () => (
+      /* reexport safe */
+      _models_js__WEBPACK_IMPORTED_MODULE_2__.Metric3DForDepthEstimation
+    ),
+    /* harmony export */
+    Metric3DPreTrainedModel: () => (
+      /* reexport safe */
+      _models_js__WEBPACK_IMPORTED_MODULE_2__.Metric3DPreTrainedModel
+    ),
+    /* harmony export */
+    Metric3Dv2ForDepthEstimation: () => (
+      /* reexport safe */
+      _models_js__WEBPACK_IMPORTED_MODULE_2__.Metric3Dv2ForDepthEstimation
+    ),
+    /* harmony export */
+    Metric3Dv2PreTrainedModel: () => (
+      /* reexport safe */
+      _models_js__WEBPACK_IMPORTED_MODULE_2__.Metric3Dv2PreTrainedModel
     ),
     /* harmony export */
     MgpstrForSceneTextRecognition: () => (
@@ -42582,6 +42937,26 @@ var __webpack_exports__ = {};
       _models_processors_js__WEBPACK_IMPORTED_MODULE_17__.Qwen2VLProcessor
     ),
     /* harmony export */
+    RFDetrForObjectDetection: () => (
+      /* reexport safe */
+      _models_js__WEBPACK_IMPORTED_MODULE_2__.RFDetrForObjectDetection
+    ),
+    /* harmony export */
+    RFDetrModel: () => (
+      /* reexport safe */
+      _models_js__WEBPACK_IMPORTED_MODULE_2__.RFDetrModel
+    ),
+    /* harmony export */
+    RFDetrObjectDetectionOutput: () => (
+      /* reexport safe */
+      _models_js__WEBPACK_IMPORTED_MODULE_2__.RFDetrObjectDetectionOutput
+    ),
+    /* harmony export */
+    RFDetrPreTrainedModel: () => (
+      /* reexport safe */
+      _models_js__WEBPACK_IMPORTED_MODULE_2__.RFDetrPreTrainedModel
+    ),
+    /* harmony export */
     RTDetrForObjectDetection: () => (
       /* reexport safe */
       _models_js__WEBPACK_IMPORTED_MODULE_2__.RTDetrForObjectDetection
@@ -42605,6 +42980,26 @@ var __webpack_exports__ = {};
     RTDetrPreTrainedModel: () => (
       /* reexport safe */
       _models_js__WEBPACK_IMPORTED_MODULE_2__.RTDetrPreTrainedModel
+    ),
+    /* harmony export */
+    RTDetrV2ForObjectDetection: () => (
+      /* reexport safe */
+      _models_js__WEBPACK_IMPORTED_MODULE_2__.RTDetrV2ForObjectDetection
+    ),
+    /* harmony export */
+    RTDetrV2Model: () => (
+      /* reexport safe */
+      _models_js__WEBPACK_IMPORTED_MODULE_2__.RTDetrV2Model
+    ),
+    /* harmony export */
+    RTDetrV2ObjectDetectionOutput: () => (
+      /* reexport safe */
+      _models_js__WEBPACK_IMPORTED_MODULE_2__.RTDetrV2ObjectDetectionOutput
+    ),
+    /* harmony export */
+    RTDetrV2PreTrainedModel: () => (
+      /* reexport safe */
+      _models_js__WEBPACK_IMPORTED_MODULE_2__.RTDetrV2PreTrainedModel
     ),
     /* harmony export */
     RawAudio: () => (
@@ -42850,6 +43245,31 @@ var __webpack_exports__ = {};
     SmolVLMProcessor: () => (
       /* reexport safe */
       _models_processors_js__WEBPACK_IMPORTED_MODULE_17__.SmolVLMProcessor
+    ),
+    /* harmony export */
+    SnacDecoderModel: () => (
+      /* reexport safe */
+      _models_js__WEBPACK_IMPORTED_MODULE_2__.SnacDecoderModel
+    ),
+    /* harmony export */
+    SnacEncoderModel: () => (
+      /* reexport safe */
+      _models_js__WEBPACK_IMPORTED_MODULE_2__.SnacEncoderModel
+    ),
+    /* harmony export */
+    SnacFeatureExtractor: () => (
+      /* reexport safe */
+      _models_feature_extractors_js__WEBPACK_IMPORTED_MODULE_11__.SnacFeatureExtractor
+    ),
+    /* harmony export */
+    SnacModel: () => (
+      /* reexport safe */
+      _models_js__WEBPACK_IMPORTED_MODULE_2__.SnacModel
+    ),
+    /* harmony export */
+    SnacPreTrainedModel: () => (
+      /* reexport safe */
+      _models_js__WEBPACK_IMPORTED_MODULE_2__.SnacPreTrainedModel
     ),
     /* harmony export */
     SpeechT5FeatureExtractor: () => (
@@ -44168,6 +44588,9 @@ var __webpack_exports__GPTNeoXTokenizer = __webpack_exports__.GPTNeoXTokenizer;
 var __webpack_exports__Gemma2ForCausalLM = __webpack_exports__.Gemma2ForCausalLM;
 var __webpack_exports__Gemma2Model = __webpack_exports__.Gemma2Model;
 var __webpack_exports__Gemma2PreTrainedModel = __webpack_exports__.Gemma2PreTrainedModel;
+var __webpack_exports__Gemma3ForCausalLM = __webpack_exports__.Gemma3ForCausalLM;
+var __webpack_exports__Gemma3Model = __webpack_exports__.Gemma3Model;
+var __webpack_exports__Gemma3PreTrainedModel = __webpack_exports__.Gemma3PreTrainedModel;
 var __webpack_exports__GemmaForCausalLM = __webpack_exports__.GemmaForCausalLM;
 var __webpack_exports__GemmaModel = __webpack_exports__.GemmaModel;
 var __webpack_exports__GemmaPreTrainedModel = __webpack_exports__.GemmaPreTrainedModel;
@@ -44269,6 +44692,10 @@ var __webpack_exports__MaskFormerModel = __webpack_exports__.MaskFormerModel;
 var __webpack_exports__MaskFormerPreTrainedModel = __webpack_exports__.MaskFormerPreTrainedModel;
 var __webpack_exports__MaskedLMOutput = __webpack_exports__.MaskedLMOutput;
 var __webpack_exports__MaxLengthCriteria = __webpack_exports__.MaxLengthCriteria;
+var __webpack_exports__Metric3DForDepthEstimation = __webpack_exports__.Metric3DForDepthEstimation;
+var __webpack_exports__Metric3DPreTrainedModel = __webpack_exports__.Metric3DPreTrainedModel;
+var __webpack_exports__Metric3Dv2ForDepthEstimation = __webpack_exports__.Metric3Dv2ForDepthEstimation;
+var __webpack_exports__Metric3Dv2PreTrainedModel = __webpack_exports__.Metric3Dv2PreTrainedModel;
 var __webpack_exports__MgpstrForSceneTextRecognition = __webpack_exports__.MgpstrForSceneTextRecognition;
 var __webpack_exports__MgpstrModelOutput = __webpack_exports__.MgpstrModelOutput;
 var __webpack_exports__MgpstrPreTrainedModel = __webpack_exports__.MgpstrPreTrainedModel;
@@ -44421,11 +44848,19 @@ var __webpack_exports__Qwen2VLForConditionalGeneration = __webpack_exports__.Qwe
 var __webpack_exports__Qwen2VLImageProcessor = __webpack_exports__.Qwen2VLImageProcessor;
 var __webpack_exports__Qwen2VLPreTrainedModel = __webpack_exports__.Qwen2VLPreTrainedModel;
 var __webpack_exports__Qwen2VLProcessor = __webpack_exports__.Qwen2VLProcessor;
+var __webpack_exports__RFDetrForObjectDetection = __webpack_exports__.RFDetrForObjectDetection;
+var __webpack_exports__RFDetrModel = __webpack_exports__.RFDetrModel;
+var __webpack_exports__RFDetrObjectDetectionOutput = __webpack_exports__.RFDetrObjectDetectionOutput;
+var __webpack_exports__RFDetrPreTrainedModel = __webpack_exports__.RFDetrPreTrainedModel;
 var __webpack_exports__RTDetrForObjectDetection = __webpack_exports__.RTDetrForObjectDetection;
 var __webpack_exports__RTDetrImageProcessor = __webpack_exports__.RTDetrImageProcessor;
 var __webpack_exports__RTDetrModel = __webpack_exports__.RTDetrModel;
 var __webpack_exports__RTDetrObjectDetectionOutput = __webpack_exports__.RTDetrObjectDetectionOutput;
 var __webpack_exports__RTDetrPreTrainedModel = __webpack_exports__.RTDetrPreTrainedModel;
+var __webpack_exports__RTDetrV2ForObjectDetection = __webpack_exports__.RTDetrV2ForObjectDetection;
+var __webpack_exports__RTDetrV2Model = __webpack_exports__.RTDetrV2Model;
+var __webpack_exports__RTDetrV2ObjectDetectionOutput = __webpack_exports__.RTDetrV2ObjectDetectionOutput;
+var __webpack_exports__RTDetrV2PreTrainedModel = __webpack_exports__.RTDetrV2PreTrainedModel;
 var __webpack_exports__RawAudio = __webpack_exports__.RawAudio;
 var __webpack_exports__RawImage = __webpack_exports__.RawImage;
 var __webpack_exports__RawVideo = __webpack_exports__.RawVideo;
@@ -44475,6 +44910,11 @@ var __webpack_exports__SiglipVisionModel = __webpack_exports__.SiglipVisionModel
 var __webpack_exports__SmolVLMForConditionalGeneration = __webpack_exports__.SmolVLMForConditionalGeneration;
 var __webpack_exports__SmolVLMImageProcessor = __webpack_exports__.SmolVLMImageProcessor;
 var __webpack_exports__SmolVLMProcessor = __webpack_exports__.SmolVLMProcessor;
+var __webpack_exports__SnacDecoderModel = __webpack_exports__.SnacDecoderModel;
+var __webpack_exports__SnacEncoderModel = __webpack_exports__.SnacEncoderModel;
+var __webpack_exports__SnacFeatureExtractor = __webpack_exports__.SnacFeatureExtractor;
+var __webpack_exports__SnacModel = __webpack_exports__.SnacModel;
+var __webpack_exports__SnacPreTrainedModel = __webpack_exports__.SnacPreTrainedModel;
 var __webpack_exports__SpeechT5FeatureExtractor = __webpack_exports__.SpeechT5FeatureExtractor;
 var __webpack_exports__SpeechT5ForSpeechToText = __webpack_exports__.SpeechT5ForSpeechToText;
 var __webpack_exports__SpeechT5ForTextToSpeech = __webpack_exports__.SpeechT5ForTextToSpeech;
@@ -44930,6 +45370,9 @@ export {
   __webpack_exports__Gemma2ForCausalLM as Gemma2ForCausalLM,
   __webpack_exports__Gemma2Model as Gemma2Model,
   __webpack_exports__Gemma2PreTrainedModel as Gemma2PreTrainedModel,
+  __webpack_exports__Gemma3ForCausalLM as Gemma3ForCausalLM,
+  __webpack_exports__Gemma3Model as Gemma3Model,
+  __webpack_exports__Gemma3PreTrainedModel as Gemma3PreTrainedModel,
   __webpack_exports__GemmaForCausalLM as GemmaForCausalLM,
   __webpack_exports__GemmaModel as GemmaModel,
   __webpack_exports__GemmaPreTrainedModel as GemmaPreTrainedModel,
@@ -45031,6 +45474,10 @@ export {
   __webpack_exports__MaskFormerPreTrainedModel as MaskFormerPreTrainedModel,
   __webpack_exports__MaskedLMOutput as MaskedLMOutput,
   __webpack_exports__MaxLengthCriteria as MaxLengthCriteria,
+  __webpack_exports__Metric3DForDepthEstimation as Metric3DForDepthEstimation,
+  __webpack_exports__Metric3DPreTrainedModel as Metric3DPreTrainedModel,
+  __webpack_exports__Metric3Dv2ForDepthEstimation as Metric3Dv2ForDepthEstimation,
+  __webpack_exports__Metric3Dv2PreTrainedModel as Metric3Dv2PreTrainedModel,
   __webpack_exports__MgpstrForSceneTextRecognition as MgpstrForSceneTextRecognition,
   __webpack_exports__MgpstrModelOutput as MgpstrModelOutput,
   __webpack_exports__MgpstrPreTrainedModel as MgpstrPreTrainedModel,
@@ -45183,11 +45630,19 @@ export {
   __webpack_exports__Qwen2VLImageProcessor as Qwen2VLImageProcessor,
   __webpack_exports__Qwen2VLPreTrainedModel as Qwen2VLPreTrainedModel,
   __webpack_exports__Qwen2VLProcessor as Qwen2VLProcessor,
+  __webpack_exports__RFDetrForObjectDetection as RFDetrForObjectDetection,
+  __webpack_exports__RFDetrModel as RFDetrModel,
+  __webpack_exports__RFDetrObjectDetectionOutput as RFDetrObjectDetectionOutput,
+  __webpack_exports__RFDetrPreTrainedModel as RFDetrPreTrainedModel,
   __webpack_exports__RTDetrForObjectDetection as RTDetrForObjectDetection,
   __webpack_exports__RTDetrImageProcessor as RTDetrImageProcessor,
   __webpack_exports__RTDetrModel as RTDetrModel,
   __webpack_exports__RTDetrObjectDetectionOutput as RTDetrObjectDetectionOutput,
   __webpack_exports__RTDetrPreTrainedModel as RTDetrPreTrainedModel,
+  __webpack_exports__RTDetrV2ForObjectDetection as RTDetrV2ForObjectDetection,
+  __webpack_exports__RTDetrV2Model as RTDetrV2Model,
+  __webpack_exports__RTDetrV2ObjectDetectionOutput as RTDetrV2ObjectDetectionOutput,
+  __webpack_exports__RTDetrV2PreTrainedModel as RTDetrV2PreTrainedModel,
   __webpack_exports__RawAudio as RawAudio,
   __webpack_exports__RawImage as RawImage,
   __webpack_exports__RawVideo as RawVideo,
@@ -45237,6 +45692,11 @@ export {
   __webpack_exports__SmolVLMForConditionalGeneration as SmolVLMForConditionalGeneration,
   __webpack_exports__SmolVLMImageProcessor as SmolVLMImageProcessor,
   __webpack_exports__SmolVLMProcessor as SmolVLMProcessor,
+  __webpack_exports__SnacDecoderModel as SnacDecoderModel,
+  __webpack_exports__SnacEncoderModel as SnacEncoderModel,
+  __webpack_exports__SnacFeatureExtractor as SnacFeatureExtractor,
+  __webpack_exports__SnacModel as SnacModel,
+  __webpack_exports__SnacPreTrainedModel as SnacPreTrainedModel,
   __webpack_exports__SpeechT5FeatureExtractor as SpeechT5FeatureExtractor,
   __webpack_exports__SpeechT5ForSpeechToText as SpeechT5ForSpeechToText,
   __webpack_exports__SpeechT5ForTextToSpeech as SpeechT5ForTextToSpeech,
