@@ -1,7 +1,7 @@
 {
   "nodeModulesDir": "auto",
   "imports": {
-    "@huggingface/transformers": "npm:@huggingface/transformers@^3.4.0"
+    "@huggingface/transformers": "npm:@huggingface/transformers@^3.4.2"
   },
   "tasks": {
     "bundle": "deno run --allow-env --allow-read --allow-run npm:esbuild --bundle --platform=neutral --outfile=VSExtension1/scripts/transformers.js @huggingface/transformers"
