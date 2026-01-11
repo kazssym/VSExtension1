@@ -31,8 +31,8 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.ClearScript.V8" Version="7.5.0" />
     <PackageReference Include="Microsoft.ClearScript.V8.Native.win-x64" Version="7.5.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Extensibility.Sdk" Version="17.13.40008" />
-    <PackageReference Include="Microsoft.VisualStudio.Extensibility.Build" Version="17.13.40008" />
+    <PackageReference Include="Microsoft.VisualStudio.Extensibility.Sdk" Version="17.14.40608" />
+    <PackageReference Include="Microsoft.VisualStudio.Extensibility.Build" Version="17.14.40608" />
   </ItemGroup>
 
   <ItemGroup>
