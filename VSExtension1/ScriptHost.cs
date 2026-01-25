@@ -32,6 +32,11 @@ namespace VSExtension1
     internal class ScriptHost
     {
         /// <summary>
+        /// Specifies the default port number used for debugging connections.
+        /// </summary>
+        private const int DebugPort = 9222;
+
+        /// <summary>
         /// The name of the initialization file containing the initial JavaScript code to be executed by the ScriptEngine.
         /// </summary>
         protected const string InitializeFileName = "__init__.js";
@@ -85,7 +90,7 @@ namespace VSExtension1
         {
             var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? ".";
 
-            var scriptEngine = new V8ScriptEngine();
+            var scriptEngine = new V8ScriptEngine(V8ScriptEngineFlags.EnableDebugging, DebugPort);
             scriptEngine.DocumentSettings.AccessFlags = DocumentAccessFlags.EnableFileLoading;
             scriptEngine.DocumentSettings.SearchPath = Path.Combine(basePath, "scripts");
             scriptEngine.DocumentSettings.ContextCallback = CreateMetaObject;
