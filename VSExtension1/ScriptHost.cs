@@ -34,7 +34,7 @@ namespace VSExtension1
         /// <summary>
         /// Specifies the default port number used for debugging connections.
         /// </summary>
-        public static readonly int DebugPort = 9222;
+        private const int DebugPort = 9222;
 
         /// <summary>
         /// The name of the initialization file containing the initial JavaScript code to be executed by the ScriptEngine.
