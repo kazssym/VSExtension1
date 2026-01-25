@@ -17,5 +17,8 @@ indent_style = space
 indent_size = 4
 tab_width = 8
 
+[*.json]
+insert_final_newline = false
+
 [*.{xml,csproj}]
 insert_final_newline = false
