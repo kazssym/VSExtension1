@@ -4,20 +4,20 @@
     "net8.0-windows10.0.17763": {
       "Microsoft.ClearScript.V8": {
         "type": "Direct",
-        "requested": "[7.5.0, )",
-        "resolved": "7.5.0",
-        "contentHash": "k2xS9o6Oz57xx24nVhOqrkmJN/sDdkYTwdfmu2XS5KpnmAyqeVJBCfc9Wh83UvKUYb7lQBHSCk7gk2hLyJoG4Q==",
+        "requested": "[7.5.1.1, )",
+        "resolved": "7.5.1.1",
+        "contentHash": "oEJxEMqzzC8XYE9kA1ajmfmloAuSlNIzNyrIfwROXkKjfeePptvUT22MqHfV6rRV4//B7XShlq7VM6o2ZM1eZQ==",
         "dependencies": {
-          "Microsoft.ClearScript.Core": "7.5.0",
-          "Microsoft.ClearScript.V8.ICUData": "7.5.0",
+          "Microsoft.ClearScript.Core": "7.5.1.1",
+          "Microsoft.ClearScript.V8.ICUData": "7.5.1.1",
           "Newtonsoft.Json": "13.0.3"
         }
       },
       "Microsoft.ClearScript.V8.Native.win-x64": {
         "type": "Direct",
-        "requested": "[7.5.0, )",
-        "resolved": "7.5.0",
-        "contentHash": "DKMxDLboTNflYkwDQ/ELrSf1vXTpew5UZ8xzrXSVKYFBU570VA6NKh1etEGhufuCuDyU7Je5L2g6H+19Dbl+tA=="
+        "requested": "[7.5.1.1, )",
+        "resolved": "7.5.1.1",
+        "contentHash": "N79bR+RG7FD8wv/tdXZuOLDx3YAQ+mSB5P0gcUNMGEFO4DljRSPlJcEzHLrPvrlPzNnc3aV6Rx2v5V3qordPJg=="
       },
       "Microsoft.VisualStudio.Extensibility.Build": {
         "type": "Direct",
@@ -112,16 +112,16 @@
       },
       "Microsoft.ClearScript.Core": {
         "type": "Transitive",
-        "resolved": "7.5.0",
-        "contentHash": "7BfzQZA7LdgpfJGSy/GBzKuURb32UpJGQObH5WAavkUxS/u9h/KaEl8N4812F6f4UWVrtwI5XdRgLMu6ukt38A==",
+        "resolved": "7.5.1.1",
+        "contentHash": "H3R4OaqQPfwxewnZcvTU6qUFyzJ05FchBD4IlO6Z0WO3iWh8PyAWHDcnt4FUmo/t0m40o8rkgnJ7g9pDT7pwJQ==",
         "dependencies": {
           "Microsoft.Win32.Registry": "5.0.0"
         }
       },
       "Microsoft.ClearScript.V8.ICUData": {
         "type": "Transitive",
-        "resolved": "7.5.0",
-        "contentHash": "brX7rIjvZPt/ZDSZOPf36ULxhlsFcEgg2WLeOXCFkexTH7MWgUGy//6vMry/QvTLhSgDrs5z+8SbEU1krnuxRg==",
+        "resolved": "7.5.1.1",
+        "contentHash": "Jg3yFIWPkfsjOHzVUTbA0VgnxXBtX9BwSL00E8HIljFm3f203e+mlJYO0tTHnqetA0xZyLKbRjRuPotUP/47Nw==",
         "dependencies": {
           "System.Text.RegularExpressions": "4.3.1"
         }
